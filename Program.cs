@@ -75,7 +75,7 @@ namespace ChatbotApp
                                 assistantResponse.Append(contentPart.Text);
                             }
                         }
-                        
+
                         Console.WriteLine();
                         messages.Add(new AssistantChatMessage(assistantResponse.ToString()));
                     });
@@ -171,14 +171,6 @@ namespace ChatbotApp
             }
 
             return "I'm sorry, I couldn't retrieve your anime list at the moment.";
-        }
-
-        private static void printList(List<ChatMessage> chatMessages) 
-        {
-            foreach (var message in chatMessages)
-            {
-                Console.WriteLine(message);
-            }
         }
     }
 }
