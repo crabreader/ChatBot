@@ -65,17 +65,19 @@ namespace ChatbotApp
                     {
                         Console.Write("Wizard: ");
 
+                        var assistantResponse = new StringBuilder();
+
                         await foreach (var completionUpdate in chatClient.CompleteChatStreamingAsync(messages))
                         {
-                            var assistantResponse = new StringBuilder();
                             foreach (var contentPart in completionUpdate.ContentUpdate)
                             {
                                 Console.Write(contentPart.Text);
                                 assistantResponse.Append(contentPart.Text);
                             }
-
-                            messages.Add(new AssistantChatMessage(assistantResponse.ToString()));
                         }
+                        
+                        Console.WriteLine();
+                        messages.Add(new AssistantChatMessage(assistantResponse.ToString()));
                     });
 
                     Console.WriteLine();
@@ -169,6 +171,14 @@ namespace ChatbotApp
             }
 
             return "I'm sorry, I couldn't retrieve your anime list at the moment.";
+        }
+
+        private static void printList(List<ChatMessage> chatMessages) 
+        {
+            foreach (var message in chatMessages)
+            {
+                Console.WriteLine(message);
+            }
         }
     }
 }
